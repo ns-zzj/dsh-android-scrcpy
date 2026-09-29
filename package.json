@@ -1,0 +1,32 @@
+{
+  "name": "@nszzj/dsh-android-scrcpy",
+  "version": "1.0.0",
+  "description": "DSH-scrcpy 安卓 Provider --- DSH-scrcpy Android Provider",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "files": [
+    "lib",
+    "resources",
+    "cordis.patch.yml",
+    "README.md",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "keywords": [
+    "dsh",
+    "cordis",
+    "scrcpy",
+    "android",
+    "adb"
+  ],
+  "license": "MIT"
+}

@@ -1,0 +1,13 @@
+# dsh-android-scrcpy bundle patch
+#
+# 只插自己那一行（android-scrcpy）。
+#
+# ⚠️ scrcpy-core 那一行由 dsh-scrcpy-core 自己的层插，这里【不许】插：
+#    两个 bundle 层各插一条同 id 条目，组合结果里会留下两条同 id 条目，
+#    挂载时被 EntryGroup.update 以 `duplicate loader entry id` 拒绝、启动直接失败
+#    （2026-09-24 实测，见设计文档 §5.6）。
+#
+# ⚠️ 本包没有浏览器半区（不注册 UI、不注册工具），所以 package.json 里没有 dsh.client。
+- insert:
+    - id: android-scrcpy
+      name: dsh-android-scrcpy
