@@ -1,6 +1,6 @@
 {
   "name": "@nszzj/dsh-android-scrcpy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "DSH-scrcpy 安卓 Provider --- DSH-scrcpy Android Provider",
   "type": "module",
   "main": "lib/index.js",

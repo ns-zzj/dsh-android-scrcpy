@@ -10,4 +10,4 @@
 # ⚠️ 本包没有浏览器半区（不注册 UI、不注册工具），所以 package.json 里没有 dsh.client。
 - insert:
     - id: android-scrcpy
-      name: dsh-android-scrcpy
+      name: @nszzj/dsh-android-scrcpy
