@@ -2,8 +2,6 @@
 
 **DSH 的安卓投屏 provider** —— 让 DSH 通过 `adb` 连上安卓设备：看画面、点/滑、按键、读控件树、给 AI 看。
 
-> 中文 | **[English](./README.en.md)**
-
 界面、AI 工具、设备与焦点、路由、门槛**全在 core 里**；本包只负责"**这台设备怎么连、怎么点、怎么出画面**"。
 
 ## 这是什么
@@ -59,11 +57,9 @@
 ## 目录结构
 
 ```
-lib/index.js                 provider 实现（3.0.0 形状：传输 / 发现 / 动作 / 环境检测 / 连接配置 + 画面四件套）
+lib/index.js                 provider 实现（传输 / 发现 / 动作 / 环境检测 / 连接配置 + 画面四件套）
 resources/scrcpy-server-v4.1  scrcpy 项目自己的服务器文件，运行时 adb push 到设备
 cordis.patch.yml             DSH 插件清单
-Dev/demo/                    独立测试件（不依赖 DSH，也不进 npm 包）
-Dev/doc.md                   开发资料说明（含"基于 core 开发 provider"的链接）
 ```
 
 ## 已知限制
@@ -71,13 +67,13 @@ Dev/doc.md                   开发资料说明（含"基于 core 开发 provide
 - **连接中途不能改缩放/帧率**：两个平台都不支持中途换档，要换就**断开重连**（改设置只对下次连接生效）
 - **首次连接/授权类弹窗**要人在设备上点确认，provider 不能代劳
 - 断流/切后台后的恢复依赖 **GOP 补发**；若设备端太久没出关键帧，恢复会慢一点
+- **读不到设备剪贴板**：`cmd clipboard` 在 AOSP 里没有实现（Android 15 实测两条命令都返回
+  `No shell command implementation`）。`Ctrl+C` 会尝试，失败即静默，某些补了这个命令的 ROM 上才会生效
 
 ## 二次开发
 
-- 本目录的开发资料（每个 demo 是干嘛的、怎么跑）→ [`Dev/doc.md`](Dev/doc.md)
-- **基于 core 开发一个 provider**（契约、core 会调你的动作、文案与语言规则、坐标与画面尺寸的坑）→
-  [core/Dev/doc.md](https://github.com/ns-zzj/dsh-scrcpy-core/blob/main/Dev/doc.md)
-- 逐字段契约以 core 的 `CONTRACT.md` 为准
+- **基于 core 开发一个 provider**（注册字段、动作、文案与语言规则、坐标与画面尺寸的坑）→
+  [core/Provider.md](https://github.com/ns-zzj/dsh-scrcpy-core/blob/main/Provider.md)
 
 ## 许可与第三方
 
@@ -85,4 +81,3 @@ Dev/doc.md                   开发资料说明（含"基于 core 开发 provide
 - 随包发布 `resources/scrcpy-server-v4.1` —— 来自 [Genymobile/scrcpy](https://github.com/Genymobile/scrcpy)，**Apache-2.0**，
   版权 `Copyright (C) 2018 Genymobile` / `Copyright (C) 2018-2026 Romain Vimont`，**原样分发、未修改**。
   出处、许可与**完整许可文本**见 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)。
-- `Dev/demo/jmuxer.min.js`（开发件，不随 npm 包发布，但随 Git 仓库分发）→ 声明在 [`Dev/demo/THIRD_PARTY_NOTICES.md`](Dev/demo/THIRD_PARTY_NOTICES.md)
